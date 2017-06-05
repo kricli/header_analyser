@@ -2,8 +2,11 @@ class HeadersController < ApplicationController
   def create
     @header = Header.new(post_params)
     @header.save
-    # hash = post_params()
-    # render plain: hash[:text]
+
+    hash = post_params()[:text]
+
+    results = `python lib/assets/extraction.py '#{hash}'`
+    render :json => results
   end
 
 

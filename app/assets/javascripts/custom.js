@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#headerForm').submit(function(){
+  $('#headerForm').submit(function(event){
     var data = {
       'header': {
         'text': $('#headerInput').val(),
@@ -10,7 +10,7 @@ $(document).ready(function(){
       url: "/headers/create",
       data: data,
       success: function(data) {
-        console.log(data)
+        console.log(JSON.stringify(data))
       }
     });
   })
