@@ -1,7 +1,9 @@
 class HeadersController < ApplicationController
   def create
-    hash = post_params()
-    render plain: hash[:text]
+    @header = Header.new(post_params)
+    @header.save
+    # hash = post_params()
+    # render plain: hash[:text]
   end
 
 
