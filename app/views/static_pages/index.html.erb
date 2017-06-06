@@ -1,10 +1,19 @@
+<style media="screen">
+  pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+  .string { color: green; }
+  .number { color: darkorange; }
+  .boolean { color: blue; }
+  .null { color: magenta; }
+  .key { color: red; }
+</style>
+
 <form id="headerForm">
   <div class="form-group">
-    <label for="comment">Header:</label>
+    <h1>Paste Header:</h1>
     <textarea class="form-control" rows="5" id="headerInput"></textarea>
   </div>
   <div class="checkbox">
     <label><input type="checkbox">Save this</label>
   </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Parse it</button>
 </form>

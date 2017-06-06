@@ -85,8 +85,8 @@ def received_parser(received_list):
 def others_parser(others):
     results = {}
     for other in others:
-        key = re.findall(pat2,other)[0]
-        value = re.findall(pat3,other)[0]
+        key = next(iter(re.findall(pat2,other)), '')
+        value = next(iter(re.findall(pat3,other)), '')
         results[key] = value
     return results
 
