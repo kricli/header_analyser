@@ -37,7 +37,6 @@ $(document).ready(function(){
       url: "/headers/create",
       data: data,
       success: function(data) {
-        console.log(JSON.stringify(data))
         var str = JSON.stringify(data, undefined, 4);
         output(syntaxHighlight(str));
       }

@@ -22,6 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+gem 'devise'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
