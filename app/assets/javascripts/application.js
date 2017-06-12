@@ -11,9 +11,13 @@
 // about supported directives.
 //
 //= require jquery3
+//= require jquery-cookie
+//= require jquery-deparam
+//= require pubsub
+//= require j-toker
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
 //= require jquery.slimscroll
-//= require_tree .
+// = require_tree .
