@@ -1,31 +1,48 @@
 $(document).ready(function(){
 
+  PubSub.subscribe('auth.emailRegistration.success', function(ev, msg) {
+    console.log(msg)
+    // alert('Check your email!');
+  });
+
+  PubSub.subscribe('auth.emailRegistration.error', function(ev, msg) {
+    console.log(msg)
+    // alert('There was a error submitting your request. Please try again!');
+  });
+
+  PubSub.subscribe('auth.emailSignIn.success', function(ev, msg) {
+    console.log(msg)
+    // alert('Welcome' + $.auth.user.name + '! Change your password!');
+  });
+
+  PubSub.subscribe('auth.emailSignIn.error', function(ev, msg) {
+    console.log(msg)
+    // alert('There was an error authenticating your account!');
+  });
+
   $.auth.configure({
     apiUrl: 'http://localhost:3000'
   });
 
-  function output(inp) {
-      document.body.appendChild(document.createElement('pre')).innerHTML = inp;
-  }
+  $('#signupForm').submit(function(event){
+    event.preventDefault();
+    var data = {
+      email: $('#signupEmail').val(),
+      password: $('#signupPassword').val(),
+      password_confirmation: $('#signupConfirmPassword').val(),
+      name: $('#signupName').val()
+    }
+    $.auth.emailSignUp(data);
+  })
 
-  function syntaxHighlight(json) {
-      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-          var cls = 'number';
-          if (/^"/.test(match)) {
-              if (/:$/.test(match)) {
-                  cls = 'key';
-              } else {
-                  cls = 'string';
-              }
-          } else if (/true|false/.test(match)) {
-              cls = 'boolean';
-          } else if (/null/.test(match)) {
-              cls = 'null';
-          }
-          return '<span class="' + cls + '">' + match + '</span>';
-      });
-  }
+  $('#loginForm').submit(function(event){
+    event.preventDefault();
+    var data = {
+      email: $('#signinEmail').val(),
+      password: $('#signinPassword').val(),
+    }
+    $.auth.emailSignIn(data);
+  })
 
   $('#headerForm').submit(function(event){
     event.preventDefault();
@@ -46,22 +63,4 @@ $(document).ready(function(){
     });
   })
 
-  $('#signupForm').submit(function(event){
-    event.preventDefault();
-    var data = {
-      'header': {
-        'text': $('#headerInput').val(),
-      }
-    };
-    $.ajax({
-      type: "POST",
-      url: "/headers/create",
-      data: data,
-      success: function(data) {
-        console.log(JSON.stringify(data))
-        var str = JSON.stringify(data, undefined, 4);
-        output(syntaxHighlight(str));
-      }
-    });
-  })
 });

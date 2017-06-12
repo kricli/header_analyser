@@ -13,7 +13,7 @@
 //= require jquery3
 //= require jquery-cookie
 //= require jquery-deparam
-//= require pubsub
+//= require pubsub-js/src/pubsub.js
 //= require j-toker
 //= require popper
 //= require bootstrap-sprockets
