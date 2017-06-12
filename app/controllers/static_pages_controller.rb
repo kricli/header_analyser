@@ -1,4 +1,9 @@
 class StaticPagesController < ApplicationController
-  def index
+
+  def landing_page
   end
+
+  def parser
+  end
+
 end
