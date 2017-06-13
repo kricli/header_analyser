@@ -1,5 +1,5 @@
 $.auth.configure({
-  apiUrl: 'http://localhost:3000'
+  apiUrl: ENV['APIURL']
 });
 
 $(document).ready(function(){
