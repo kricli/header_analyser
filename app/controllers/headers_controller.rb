@@ -1,4 +1,7 @@
 class HeadersController < ApplicationController
+
+  before_action :authenticate_user!
+
   def create
     @header = Header.new(post_params)
     @header.save
@@ -13,4 +16,5 @@ class HeadersController < ApplicationController
   def post_params
     params.require(:header).permit(:text)
   end
+  
 end

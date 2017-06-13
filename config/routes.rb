@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   mount_devise_token_auth_for 'User', at: 'auth'
-  
-  get 'static_pages/parser'
+
+  get 'parser', to: 'static_pages#parser'
+
+  get 'dashboard', to: 'static_pages#dashboard'
 
   post 'headers/create'
 

@@ -11,6 +11,12 @@
  * file per style scope.
  *
  *= require_self
+ *= require bootstrap-extension.css
+ *= require sidebar-nav.min.css
+ *= require morris.css
+ *= require animate.css
+ *= require style.css
+ *= require gray-dark.css
  *= require_tree .
  */
 
