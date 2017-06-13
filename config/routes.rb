@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'static_pages#dashboard'
 
+  get 'analyser', to: 'static_pages#analyser'
+
+  get 'history', to: 'static_pages#history'
+
   post 'headers/create'
 
   root 'static_pages#landing_page'

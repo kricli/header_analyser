@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Header Analyser</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-19175540-9', 'auto');
+    ga('send', 'pageview');
+    </script>
   </head>
 
   <body>
@@ -14,7 +30,7 @@
       <nav class="navbar navbar-default navbar-static-top m-b-0">
         <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
           <div class="top-left-part">
-            <a class="logo" href="index.html">
+            <a class="logo" href="/dashboard">
               <b>
                 <%= image_tag("logo-white.png", :alt => "Home", :class => "dark-logo")%>
                 <%= image_tag("eliteadmin-logo-dark.png", :alt => "Home", :class => "light-logo") %>
@@ -70,26 +86,26 @@
             </li>
             <li class="nav-small-cap">--- Main menu</li>
             <li>
-              <a href="index.html" class="waves-effect active">
+              <a href="/dashboard" class="waves-effect">
                 <i class="linea-icon linea-basic fa-fw" data-icon="v"></i>
                 <span class="hide-menu"> Dashboard</span>
               </a>
             </li>
             <li>
-              <a href="index.html" class="waves-effect">
+              <a href="/analyser" class="waves-effect">
                 <i data-icon=")" class="linea-icon linea-basic fa-fw"></i>
                 <span class="hide-menu">New header</span>
               </a>
             </li>
             <li>
-              <a href="index.html" class="waves-effect">
+              <a href="/history" class="waves-effect">
                 <i data-icon="F" class="linea-icon linea-software fa-fw"></i>
                 <span class="hide-menu">My headers</span>
               </a>
             </li>
             <li class="nav-small-cap">--- Support</li>
             <li>
-              <a href="login.html" class="waves-effect">
+              <a href="javascript:void(0)" class="waves-effect">
                 <i class="ti-settings"></i>
                 <span class="hide-menu">Account Setting</span>
               </a>

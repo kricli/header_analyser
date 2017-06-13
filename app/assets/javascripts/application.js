@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery3
+//= require jquery_ujs
 //= require jquery-cookie
 //= require jquery-deparam
 // = require pubsub-js/src/pubsub.js
@@ -30,4 +31,3 @@
 //= require custom.js
 //= require jQuery.style.switcher.js
 //= require rails-ujs
-//= require turbolinks

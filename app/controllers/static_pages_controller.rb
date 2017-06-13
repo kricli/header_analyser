@@ -7,6 +7,14 @@ class StaticPagesController < ApplicationController
     render layout: "header"
   end
 
+  def analyser
+    render layout: "header"
+  end
+
+  def history
+    render layout: "header"
+  end
+
   def parser
   end
 
