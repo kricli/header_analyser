@@ -4,8 +4,7 @@ $.auth.configure({
 
 $(document).ready(function(){
 
-  $('#headerForm').submit(function(event){
-    event.preventDefault();
+  $('#analyseButton').click(function(event){
     var data = {
       'header': {
         'text': $('#headerInput').val(),
@@ -17,8 +16,8 @@ $(document).ready(function(){
       data: data,
       success: function(data) {
         console.log(JSON.stringify(data))
-        var str = JSON.stringify(data, undefined, 4);
-        output(syntaxHighlight(str));
+        // var str = JSON.stringify(data, undefined, 4);
+        // output(syntaxHighlight(str));
       }
     });
   })

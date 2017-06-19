@@ -216,7 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap!
-  bower-rails (~> 0.11.0)
+  bower-rails
   byebug
   capybara (~> 2.13)
   coffee-rails

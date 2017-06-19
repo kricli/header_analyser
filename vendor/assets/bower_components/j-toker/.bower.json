@@ -42,6 +42,6 @@
     "commit": "888c56b68b828f2fd4a6fd8162479260c3731c92"
   },
   "_source": "https://github.com/lynndylanhurley/j-toker.git",
-  "_target": "0.0.9",
+  "_target": "*",
   "_originalSource": "j-toker"
 }

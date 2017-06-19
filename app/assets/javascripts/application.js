@@ -28,6 +28,8 @@
 //= require jquery.peity.init.js
 //= require waves.js
 //= require theme.js
+//= require rails-ujs
+//= require googlemaps
+//= require ipmapper
 //= require custom.js
 //= require jQuery.style.switcher.js
-//= require rails-ujs

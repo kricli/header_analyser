@@ -16,6 +16,7 @@ class StaticPagesController < ApplicationController
   end
 
   def parser
+    render :layout => false
   end
 
 end

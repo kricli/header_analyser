@@ -1,10 +1,81 @@
-<form id="headerForm">
-  <div class="form-group">
-    <h1>Paste Header:</h1>
-    <textarea class="form-control" rows="5" id="headerInput"></textarea>
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox">Save this</label>
-  </div>
-    <button type="submit" class="btn btn-primary">Parse it</button>
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Header Analyser</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <script type="text/javascript">
+    $(function(){
+        try{
+            IPMapper.initializeMap("map");
+            IPMapper.addIPMarker("111.111.111.111");
+        } catch(e){
+            //handle error
+        }
+    });
+    </script>
+  </head>
+  <body>
+    <input id="ip" name="ip" type="text" />
+    <button onclick="IPMapper.addIPMarker($('#ip').val());">Geocode</button>
+    <div id="map" style="height: 500px;"></div>
+    <br><br><br>
+    <form id="headerForm">
+      <div class="form-group">
+        <h1>Paste Header:</h1>
+        <textarea class="form-control" rows="5" id="headerInput"></textarea>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox">Save this</label>
+      </div>
+        <button type="submit" class="btn btn-primary">Parse it</button>
+    </form>
+
+    <script type="text/javascript">
+    function output(inp) {
+      document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+    }
+
+    function syntaxHighlight(json) {
+      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'key';
+          } else {
+            cls = 'string';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'boolean';
+        } else if (/null/.test(match)) {
+          cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
+    }
+
+    $('#headerForm').submit(function(event){
+      event.preventDefault();
+      var data = {
+        'header': {
+          'text': $('#headerInput').val(),
+        }
+      };
+      $.ajax({
+        type: "POST",
+        url: "/headers/create",
+        data: data,
+        success: function(data) {
+          console.log(JSON.stringify(data))
+          var str = JSON.stringify(data, undefined, 4);
+          output(syntaxHighlight(str));
+        }
+      });
+    })
+    </script>
+  </body>
+</html>

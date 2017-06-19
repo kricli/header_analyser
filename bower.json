@@ -1,6 +1,6 @@
 {
     "name": "bower-rails generated vendor assets",
     "dependencies": {
-      "j-toker":"0.0.9"
+      "j-toker":"*"
     }
 }

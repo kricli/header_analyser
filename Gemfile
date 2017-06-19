@@ -26,7 +26,8 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem "font-awesome-rails"
 gem 'morrisjs-rails'
 gem 'raphael-rails'
-gem "bower-rails", "~> 0.11.0"
+gem "bower-rails"
+# gem "bower-rails", "~> 0.11.0"
 gem 'devise_token_auth'
 gem 'omniauth'
 
