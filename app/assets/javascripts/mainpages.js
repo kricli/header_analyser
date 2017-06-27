@@ -19,14 +19,13 @@ $(document).ready(function(){
     $('#name').text(" " + user.name)
   })
   .fail(function(resp) {
-    window.location.replace("/")
   });
 
   $('#logout').click(function(){
     $.auth
     .signOut()
     .then(function(data) {
-      window.location.replace("/")
+      location.reload(true);
     })
   })
 

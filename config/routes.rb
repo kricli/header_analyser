@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'parser', to: 'static_pages#parser'
 
-  get 'dashboard', to: 'static_pages#dashboard'
+  get 'dashboard', to: 'static_pages#dashboard', as: :dashboard
 
   get 'analyser', to: 'static_pages#analyser'
 

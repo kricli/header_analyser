@@ -1,6 +1,6 @@
 class HeadersController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_current_user
 
   def create
     @header = Header.new(post_params)
