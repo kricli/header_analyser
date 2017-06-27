@@ -3,6 +3,25 @@ $.auth.configure({
 });
 
 $(document).ready(function(){
+  var updateResults = function(data){
+    var html = ""
+    length = data.Received.length
+
+    // <tr>
+    //   <td>
+    //     <a data-toggle="collapse"  href="javascript:void(0)" aria-expanded="true">
+    //       <span title="Message ID: " data-toggle="tooltip">1</span>
+    //     </a>
+    //   </td>
+    //   <td>Herman Beck</td>
+    //   <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+    //   <td>$45.00</td>
+    //   <td>
+    //     <div class="label label-table label-success">Paid</div>
+    //   </td>
+    //   <td>EN</td>
+    // </tr>
+  }
 
   $('#analyseButton').click(function(event){
     var data = {
@@ -15,6 +34,7 @@ $(document).ready(function(){
       url: "/headers/create",
       data: data,
       success: function(data) {
+        updateResults(data)
         console.log(JSON.stringify(data))
         // var str = JSON.stringify(data, undefined, 4);
         // output(syntaxHighlight(str));

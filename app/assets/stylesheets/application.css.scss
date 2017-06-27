@@ -13,11 +13,11 @@
  *= require_self
  *= require bootstrap-extension.css
  *= require sidebar-nav.min.css
- *= require morris.css
  *= require animate.css
- *= require style.css
+ *= require morris.css
+ *= require static_pages.css.scss
+ *= require style.css.erb.scss
  *= require gray-dark.css
- *= require_tree .
  */
 
 @import "bootstrap";

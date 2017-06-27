@@ -238,4 +238,12 @@ $(document).ready(function () {
       });
   }
 
+  $('#analyseButton').click(function () {
+    $("#headerTextRow").slideUp();
+    $("#resultsRow, #receivedRow").fadeIn();
+  });
+  $('#backButton').click(function () {
+    $("#headerTextRow").slideDown();
+    $("#resultsRow, #receivedRow").fadeOut();
+  });
 });

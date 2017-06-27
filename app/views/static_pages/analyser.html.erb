@@ -9,16 +9,118 @@
     </ol>
   </div>
 </div>
-<div class="row">
-<div class="col-md-12">
-  <div class="white-box">
-    <div>
-      <h3 class="box-title">Paste the header below</h3>
-      <div class="form-group">
-          <textarea class="form-control" id="headerInput" rows="15" placeholder="Enter text ..."></textarea>
+<div id="headerTextRow" class="row">
+  <div class="col-lg-12">
+    <div class="white-box">
+      <div>
+        <h3 class="box-title">Paste the header below</h3>
+        <div class="form-group">
+            <textarea class="form-control" id="headerInput" rows="15" placeholder="Enter text ..."></textarea>
+        </div>
+        <hr>
+        <button id="analyseButton" class="btn btn-primary"><i class="fa fa-bolt"></i> Analyse</button>
       </div>
+    </div>
+  </div>
+</div>
+<div id="resultsRow" class="row">
+  <div class="col-lg-12">
+    <div class="white-box">
+      <h3 class="box-title">
+        Results Highlights
+        <a class="get-code" data-toggle="collapse" href="#pgr9" aria-expanded="true">
+          <i class="fa fa-file-text-o" title="Show input" data-toggle="tooltip"></i>
+        </a>
+      </h3>
+      <div class="collapse m-t-15" id="pgr9" aria-expanded="true">
+        <code>&lt;span class="mytooltip tooltip-effect-1"&gt;
+        &lt;span class="tooltip-item2">Euclid&lt;/span&gt;
+        &lt;span class="tooltip-content4 clearfix"&gt;
+        &lt;span class="tooltip-text2"&gt;
+        &lt;strong&gt;Euclid&lt;/strong&gt;
+        </code>
+      </div>
+      <p>Tesseract, finite but unbounded take root and flourish,
+        <span class="mytooltip tooltip-effect-1">
+          <span class="tooltip-item2">Euclid</span>
+          <span class="tooltip-content4 clearfix">
+            <span class="tooltip-text2">
+              <strong>Euclid</strong>, also known as Euclid of Alexandria, was a Greek mathematician, often referred to as the "Father of Geometry". He was active in Alexandria during the reign of Ptolemy I. <a href="http://en.wikipedia.org/wiki/Euclid">Wikipedia</a>
+            </span>
+          </span>
+        </span>
+        rogue laws of physics, star stuff harvesting star light, encyclopaedia galactica are creatures of the cosmos the only home we've ever known ship of the imagination prime number
+        <span class="mytooltip tooltip-effect-2">
+          <span class="tooltip-item2">quasar</span>
+          <span class="tooltip-content4 clearfix">
+            <span class="tooltip-text2">
+              <strong>Quasars</strong> are believed to be powered by accretion of material into supermassive black holes in the nuclei of distant galaxies, making these luminous versions of the general... <a href="http://en.wikipedia.org/wiki/Quasar">Wikipedia</a>
+            </span>
+          </span>
+        </span>
+        courage of our questions.
+      </p>
+      <p>Colonies. Jean-François Champollion, billions upon billions descended from astronomers the sky calls to us! Made in the interiors of collapsing stars, billions upon billions radio telescope paroxysm of global death not a sunrise but a galaxyrise, gathered by gravity permanence of the stars?</p>
       <hr>
-      <button id="analyseButton" class="btn btn-primary"><i class="fa fa-bolt"></i> Analyse</button>
+      <button id="backButton" class="btn btn-primary"><i class="fa fa-backward"></i> Back</button>
+    </div>
+  </div>
+</div>
+<div id="receivedRow" class="row">
+  <div class="col-lg-12">
+    <div class="white-box">
+      <h3 class="box-title m-b-0">Routing information</h3>
+      <p class="text-muted m-b-20">The traces of the message as it relayed across different severs</p>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Hop</th>
+              <th>From</th>
+              <th>By</th>
+              <th>With</th>
+              <th>For</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a data-toggle="collapse"  href="javascript:void(0)" aria-expanded="true">
+                  <span title="Message ID: " data-toggle="tooltip">1</span>
+                </a>
+              </td>
+              <td>Herman Beck</td>
+              <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
+              <td>$45.00</td>
+              <td>
+                <div class="label label-table label-success">Paid</div>
+              </td>
+              <td>EN</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Mary Adams</td>
+              <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 12, 2017</span> </td>
+              <td>$245.30</td>
+              <td>
+                <div class="label label-table label-danger">Shipped</div>
+              </td>
+              <td>CN</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Caleb Richards</td>
+              <td><span class="text-muted"><i class="fa fa-clock-o"></i> May 18, 2017</span> </td>
+              <td>$38.00</td>
+              <td>
+                <div class="label label-table label-info">Shipped</div>
+              </td>
+              <td>AU</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
