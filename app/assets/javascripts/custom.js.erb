@@ -27,6 +27,9 @@ $(document).ready(function(){
     var data = {
       'header': {
         'text': $('#headerInput').val(),
+        'name': $('#headerNameInput').val(),
+        'description': $('#headerDescriptionInput').val(),
+        'save': $('#saveBox').is(':checked')
       }
     };
     $.ajax({

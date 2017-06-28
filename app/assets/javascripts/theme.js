@@ -246,4 +246,11 @@ $(document).ready(function () {
     $("#headerTextRow").slideDown();
     $("#resultsRow, #receivedRow").fadeOut();
   });
+  $('#saveBoxDiv').click(function (){
+    if ($('#saveBox').is(':checked')) {
+      $("#additionalInfo").fadeIn();
+    } else {
+      $("#additionalInfo").fadeOut();
+    }
+  });
 });

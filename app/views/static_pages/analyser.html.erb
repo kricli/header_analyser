@@ -15,10 +15,25 @@
       <div>
         <h3 class="box-title">Paste the header below</h3>
         <div class="form-group">
-            <textarea class="form-control" id="headerInput" rows="15" placeholder="Enter text ..."></textarea>
+          <textarea class="form-control" id="headerInput" rows="15" placeholder=""></textarea>
         </div>
-        <hr>
-        <button id="analyseButton" class="btn btn-primary"><i class="fa fa-bolt"></i> Analyse</button>
+        <div class="checkbox checkbox-success" id="saveBoxDiv">
+          <input id="saveBox" type="checkbox">
+          <label for="saveBox"> Save this </label>
+          <br>
+        </div>
+        <div class="form-group" id="additionalInfo">
+          <hr>
+          <label>Name</label>
+          <input type="text" class="form-control" id="headerNameInput" placeholder="Name your header">
+          <br>
+          <label>Description</label>
+          <textarea class="form-control" id="headerDescriptionInput" rows="3" placeholder="Optional"></textarea>
+        </div>
+        <div id="buttonGroup">
+          <hr>
+          <button id="analyseButton" class="btn btn-primary"><i class="fa fa-bolt"></i> Analyse</button>
+        </div>
       </div>
     </div>
   </div>
