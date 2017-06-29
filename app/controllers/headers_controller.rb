@@ -5,7 +5,7 @@ class HeadersController < ApplicationController
   def create
     save = post_params()[:save].to_bool
     text = post_params()[:text]
-    results = `python lib/assets/extraction.py '#{text}'`
+    results = `python lib/assets/extraction.py #{Shellwords.escape(text)}`
 
     if save
       @header = current_user.headers.new(post_params.except(:save))

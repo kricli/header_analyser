@@ -4,12 +4,12 @@ import sys
 
 # Separate the fields
 # pat1 = "(\S.+:\B[.\S\s]+?)(?=[A-Z][\-a-zA-Z]+:\B|$)"
-pat1 = "(?:^|\n)([A-Z].+?:[.\S\s]+?)(?=\n[A-Z].+?:\B|$)"
+pat1 = "(?:^|\n)([A-z].+?:[.\S\s]*?)(?=\n[A-z].+?:\B|$)"
 # pat1 = "([A-Z][\-a-zA-Z]+:\B[.\S\s]+?)(?=[A-Z][\-a-zA-Z]+:\B|$)"
 # Get header key
-pat2 = "^([A-Z][\-a-zA-Z\s]+):\B"
+pat2 = "^([A-z][\-a-zA-Z\s]+):\B"
 # Get content
-pat3 = "^[A-Z][\-a-zA-Z\s]+:\B\s([.\S\s]+)"
+pat3 = "^[A-z][\-a-zA-Z\s]+:\B\s([.\S\s]+)"
 # Get from content
 pat_from = "from\s(.+?)(?=\s?(?:by|with|id|for|;|$))"
 # Get by address
