@@ -11,3 +11,13 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 #signupForm, #additionalInfo, #resultsRow, #receivedRow{
   display: none;
 }
+
+.modal-body p {
+    word-wrap: break-word;
+}
+
+.modal-content {
+  margin-top: 200px;
+  margin-left: -200px;
+  width: 1200px;
+}

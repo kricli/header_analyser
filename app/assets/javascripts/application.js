@@ -12,11 +12,13 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require jquery-ui
 //= require jquery-cookie
 //= require jquery-deparam
 // = require pubsub-js/src/pubsub.js
 //= require j-toker
 //= require popper
+//= require custom.js
 //= require bootstrap-sprockets
 //= require morris
 //= require raphael
@@ -31,5 +33,4 @@
 //= require rails-ujs
 //= require googlemaps
 //= require ipmapper
-//= require custom.js
 //= require jQuery.style.switcher.js

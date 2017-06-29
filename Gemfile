@@ -21,6 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem "font-awesome-rails"

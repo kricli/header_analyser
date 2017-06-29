@@ -23,6 +23,30 @@ class HeadersController < ApplicationController
     render :json => @headers
   end
 
+  def update
+    @header = current_user.headers.find_by_id(params[:id])
+
+    if @header.nil?
+      render json: { message: "Cannot find header" }, status: :not_found
+    else
+      @header.update(post_params)
+      render :json => @header
+    end
+  end
+
+  def destroy
+    @header = current_user.headers.find_by_id(params[:id])
+    if @header.nil?
+      render json: { message: "Cannot find header" }, status: :not_found
+    else
+      if @header.destroy
+        render json: { message: "Successfully deleted" }, status: :no_content
+      else
+        render json: { message: "Unsuccessfully deleted" }, status: :bad_request
+      end
+    end
+  end
+
 
   def post_params
     params.require(:header).permit(:text, :name, :description, :save)

@@ -237,20 +237,4 @@ $(document).ready(function () {
           return '<span class="' + cls + '">' + match + '</span>';
       });
   }
-
-  $('#analyseButton').click(function () {
-    $("#headerTextRow").slideUp();
-    $("#resultsRow, #receivedRow").fadeIn();
-  });
-  $('#backButton').click(function () {
-    $("#headerTextRow").slideDown();
-    $("#resultsRow, #receivedRow").fadeOut();
-  });
-  $('#saveBoxDiv').click(function (){
-    if ($('#saveBox').is(':checked')) {
-      $("#additionalInfo").fadeIn();
-    } else {
-      $("#additionalInfo").fadeOut();
-    }
-  });
 });

@@ -12,18 +12,12 @@ pat2 = "^([A-Z][\-a-zA-Z\s]+):\B"
 pat3 = "^[A-Z][\-a-zA-Z\s]+:\B\s([.\S\s]+)"
 # Get from content
 pat_from = "from\s(.+?)(?=\s?(?:by|with|id|for|;|$))"
-# Get from address
-pat4 = "^from\s(.+?\s)"
-# Get from IP
-pat5 = "(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
-# Get from port number
-pat6 = "\[?\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]?:(\d+)"
 # Get by address
 pat7 = "by\s(.+?)(?=\s?(?:with|id|for|;|$))"
 # Get with content
 pat8 = "with\s(.+?)(?=\s?(?:id|for|;|$))"
 # Get id
-pat9 = "id\s(.+?)\s"
+pat9 = "id\s(.+?);?\s"
 # Get for address
 pat10 = "for\s<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?"
 # Get date and time
@@ -60,23 +54,18 @@ def received_parser(received_list):
     for received in reversed_received_list:
         content = next(iter(re.findall(pat3,received)), '')
         from_content = next(iter(re.findall(pat_from,content)), '')
-        from_address = next(iter(re.findall(pat4,from_content)), '')
-        from_IP = next(iter(re.findall(pat5,from_content)), '')
-        from_port = next(iter(re.findall(pat6,from_content)), '')
+        from_results = from_parser(from_content)
         by_address = next(iter(re.findall(pat7,content)), '')
         with_content = next(iter(re.findall(pat8,content)), '')
+        with_results = with_parser(with_content)
         id = next(iter(re.findall(pat9,content)), '')
         for_address = next(iter(re.findall(pat10,content)), '')
         timestamp = next(iter(re.findall(pat11,content)), '')
         results.append({
             "step"      : step,
-            "from"      : {
-                "address" : from_address,
-                "IP"      : from_IP,
-                "port"    : from_port
-            },
+            "from"      : from_results,
             "by"        : by_address,
-            "with"      : with_content,
+            "with"      : with_results,
             "id"        : id,
             "for"       : for_address,
             "timestamp" : timestamp
@@ -90,6 +79,78 @@ def others_parser(others):
         key = next(iter(re.findall(pat2,other)), '')
         value = next(iter(re.findall(pat3,other)), '')
         results[key] = value
+    return results
+
+def from_parser(from_content):
+    # Get address
+    pat1 = "^from\s(.+?\s)"
+    # Get IP
+    pat2 = "(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
+    # Get port number
+    pat3 = "\[?\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]?:(\d+)"
+    from_address = next(iter(re.findall(pat1,from_content)), '')
+    from_IP = next(iter(re.findall(pat2,from_content)), '')
+    from_port = next(iter(re.findall(pat3,from_content)), '')
+    results = {
+        "address" : from_address,
+        "IP"      : from_IP,
+        "port"    : from_port
+    }
+    return results
+
+def with_parser(with_content):
+    str = with_content.lower()
+
+    if "esmtpsa" in str:
+        with_protocol = "ESMTPSA"
+        with_protocol_description = "Extended Simple Mail Transfer Protocol with both STARTTLS and SMTP AUTH successfully negotiated"
+    elif "esmtps" in str:
+        with_protocol = "ESMTPS"
+        with_protocol_description = "Extended Simple Mail Transfer Protocol with STARTTLS successfully negotiated"
+    elif "esmtpa" in str:
+        with_protocol = "ESMTPA"
+        with_protocol_description = "Extended Simple Mail Transfer Protocol with SMTP AUTH successfully negotiated"
+    elif "esmtp" in str:
+        with_protocol = "ESMTP"
+        with_protocol_description = "Extended Simple Mail Transfer Protocol"
+    elif "smtp" in str:
+        with_protocol = "SMTP"
+        with_protocol_description = "Simple Mail Transfer Protocol"
+    elif "mapi" in str:
+        with_protocol = "MAPI"
+        with_protocol_description = "Messaging Application Programming Interface"
+    elif "imap" in str:
+        with_protocol = "IMAP"
+        with_protocol_description = "Internet Message Access Protocol"
+    elif "pop" in str:
+        with_protocol = "POP"
+        with_protocol_description = "Post Office Protocol"
+    elif "http" in str:
+        with_protocol = "HTTP"
+        with_protocol_description = "Hypertext Transfer Protocol"
+    else:
+        with_protocol = ""
+        with_protocol_description = ""
+
+    if "exim" in str:
+        with_MTA = "Exim"
+    elif "postfix" in str:
+        with_MTA = "Postfix"
+    elif "sendmail" in str:
+        with_MTA = "Sendmail"
+    elif "qmail" in str:
+        with_MTA = "Qmail"
+    elif "microsoft smtp server" in str:
+        with_MTA = "Microsoft SMTP Server"
+    else:
+        with_MTA = ""
+
+    results = {
+        "content"               : with_content,
+        "protocol"              : with_protocol,
+        "protocol_description"  : with_protocol_description,
+        "MTA"                   : with_MTA
+    }
     return results
 
 main()
