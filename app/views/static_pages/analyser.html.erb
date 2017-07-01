@@ -101,7 +101,10 @@
           <tbody id="receivedTable"></tbody>
         </table>
       </div>
+      <div id="map-canvas"></div>
     </div>
   </div>
 </div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS'] %>"></script>
+<%= javascript_include_tag "initMap" %>
 <%= javascript_include_tag "analyser" %>

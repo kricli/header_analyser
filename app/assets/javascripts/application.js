@@ -31,6 +31,4 @@
 //= require jquery.peity.min.js
 //= require jquery.peity.init.js
 //= require rails-ujs
-//= require googlemaps
-//= require ipmapper
 //= require jQuery.style.switcher.js

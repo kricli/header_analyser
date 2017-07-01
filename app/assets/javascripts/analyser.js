@@ -25,15 +25,18 @@ $(document).ready(function(){
     }
     $("#receivedTable").html(html)
     $('[data-toggle="tooltip"]').tooltip()
-
-
-    //   <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
-    //   <td>$45.00</td>
-    //   <td>
-    //     <div class="label label-table label-success">Paid</div>
-    //   </td>
-    //   <td>EN</td>
-    // </tr>
+    var ipArray = []
+    for (i = 0; i < length; i++) {
+      var hop = received[i].step + 1
+      var ip = received[i].from.IP
+      if (ip !== "") {
+        ipArray.push({
+          'hop' : hop,
+          'ip'  : ip
+        })
+      }
+    }
+    google.maps.event.addDomListener(window, 'load', initMap(ipArray));
   }
 
   var analyse = function(data){
@@ -97,5 +100,8 @@ $(document).ready(function(){
       $('#saveBox').attr('checked', false)
     }
   })()
+
+
+
 
 });
