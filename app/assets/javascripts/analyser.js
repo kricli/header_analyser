@@ -1,24 +1,23 @@
 $(document).ready(function(){
-
   var updateResults = function(data){
     var html = ""
     received = data.Received
     length = received.length
     for (i = 0; i < length; i++) {
       html += "<tr><td align='center'><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='ID: "
-      html += received[i].id
+      html += received[i].id ? received[i].id : 'Not present'
       html += "' data-toggle='tooltip'>"
       html += received[i].step + 1
       html += "</span></a></td><td>"
-      html += received[i].from.IP
+      html += received[i].from.IP ? received[i].from.IP : '<div class="label label-table label-info">Not present</div>'
       html += "</td><td>"
-      html += received[i].by
+      html += received[i].by.address ? received[i].by.address : '<div class="label label-table label-info">Not present</div>'
       html += "</td><td><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='"
       html += received[i].with.protocol_description
       html += "' data-toggle='tooltip'>"
-      html += received[i].with.protocol
+      html += received[i].with.protocol ? received[i].with.protocol : '<div class="label label-table label-info">Not present</div>'
       html += "</td><td>"
-      html += received[i].for
+      html += received[i].for ? received[i].for : '<div class="label label-table label-info">Not present</div>'
       html += "</td><td><span class='text-muted'><i class='fa fa-clock-o'></i> "
       html += received[i].timestamp
       html += "</span></td></tr>"

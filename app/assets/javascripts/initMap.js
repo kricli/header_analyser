@@ -29,7 +29,7 @@ var initMap = function(array) {
     array.forEach(function(item) {
       if (ipArray.length !== 0 && (item.latitude === ipArray[ipArray.length - 1].latitude && item.longitude === ipArray[ipArray.length - 1].longitude)) {
         ipArray[ipArray.length - 1].lastHop = item.hop
-      } else {
+      } else if (item.latitude != 0 && item.longitude != 0){
         ipArray.push({
           latitude  : item.latitude,
           longitude : item.longitude,

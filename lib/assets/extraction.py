@@ -11,13 +11,13 @@ pat2 = "^([A-z][\-a-zA-Z\s]+):\B"
 # Get content
 pat3 = "^[A-z][\-a-zA-Z\s]+:\B\s([.\S\s]+)"
 # Get from content
-pat_from = "from\s(.+?)(?=\s?(?:by|with|id|for|;|$))"
-# Get by address
-pat7 = "by\s(.+?)(?=\s?(?:with|id|for|;|$))"
+pat_from = "from\s(.+?)(?=\s?(?:by|with|\sid|for|;|$))"
+# Get by content
+pat_by = "by\s(.+?)(?=\s?(?:with|\sid|for|;|$))"
 # Get with content
 pat8 = "with\s(.+?)(?=\s?(?:id|for|;|$))"
 # Get id
-pat9 = "id\s(.+?);?\s"
+pat9 = "\sid\s(.+?);?\s"
 # Get for address
 pat10 = "for\s<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?"
 # Get date and time
@@ -55,7 +55,8 @@ def received_parser(received_list):
         content = next(iter(re.findall(pat3,received)), '')
         from_content = next(iter(re.findall(pat_from,content)), '')
         from_results = from_parser(from_content)
-        by_address = next(iter(re.findall(pat7,content)), '')
+        by_content = next(iter(re.findall(pat_by,content)), '')
+        by_results = by_parser(by_content)
         with_content = next(iter(re.findall(pat8,content)), '')
         with_results = with_parser(with_content)
         id = next(iter(re.findall(pat9,content)), '')
@@ -64,7 +65,7 @@ def received_parser(received_list):
         results.append({
             "step"      : step,
             "from"      : from_results,
-            "by"        : by_address,
+            "by"        : by_results,
             "with"      : with_results,
             "id"        : id,
             "for"       : for_address,
@@ -92,10 +93,45 @@ def from_parser(from_content):
     from_IP = next(iter(re.findall(pat2,from_content)), '')
     from_port = next(iter(re.findall(pat3,from_content)), '')
     results = {
-        "address" : from_address,
-        "IP"      : from_IP,
-        "port"    : from_port
+    "address" : from_address,
+    "IP"      : from_IP,
+    "port"    : from_port
     }
+    return results
+
+def by_parser(by_content):
+    # Get address
+    pat1 = "(?=.{4,253}$)((?:(?!-)[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]\.)+[a-zA-Z]{2,63})"
+    # Get IP
+    pat2 = "(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
+    # Get content inside the bracket (non IP)
+    pat3 = "\(([A-z].+)\)"
+
+    by_address = next(iter(re.findall(pat1,by_content)), '')
+    by_IP = next(iter(re.findall(pat2,by_content)), '')
+    bracket_content = next(iter(re.findall(pat3,by_content)), '')
+    str = bracket_content.lower()
+    if "exim" in str:
+        by_MTA = "Exim"
+    elif "postfix" in str:
+        by_MTA = "Postfix"
+    elif "sendmail" in str:
+        by_MTA = "Sendmail"
+    elif "qmail" in str:
+        by_MTA = "Qmail"
+    elif "microsoft smtp server" in str:
+        by_MTA = "Microsoft SMTP Server"
+    elif "coremail" in str:
+        by_MTA = "Coremail"
+    else:
+        by_MTA = ""
+
+    results = {
+        "address" : by_address,
+        "IP"      : by_IP,
+        "MTA"     : by_MTA
+    }
+
     return results
 
 def with_parser(with_content):
