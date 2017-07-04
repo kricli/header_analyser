@@ -23,6 +23,8 @@ pat10 = "for\s<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?"
 # Get date and time
 pat11 = "\d{1,2}\s\w{3}\s\d{4}\s\d{2}:\d{2}:\d{2}\s(?:\+|\-)\d{4}"
 
+Info = []
+
 def main():
 
     string = sys.argv[1]
@@ -35,13 +37,12 @@ def main():
         stripped_field = field.replace('\r', '').replace('\n', '').replace('\t', ' ')
         if field.startswith( 'Received' ):
             received_list.append(stripped_field)
-            # print(stripped_field)
         else:
             others.append(stripped_field)
-            # print(field)
 
     results = others_parser(others)
     results["Received"] = received_parser(received_list)
+    results["Info"] = Info
 
     results_json = json.dumps(results)
 
@@ -80,6 +81,15 @@ def others_parser(others):
         key = next(iter(re.findall(pat2,other)), '')
         value = next(iter(re.findall(pat3,other)), '')
         results[key] = value
+        str = key.lower()
+        if "message-id" == str:
+            message_id_parser(other)
+        elif "x-mailer" == str:
+            x_mailer_parser(other)
+        elif "user-agent" == str:
+            user_agent_parser(other)
+        elif "username" in str or "x-authenticated-user" == str:
+            username_parser(other)
     return results
 
 def from_parser(from_content):
@@ -188,5 +198,59 @@ def with_parser(with_content):
         "MTA"                   : with_MTA
     }
     return results
+
+def message_id_parser(item):
+    results = {}
+    str = item.lower()
+
+    if "android" in str:
+        device_OS = "Android OS"
+        description = "This email is sent from Android OS, most likely through a mobile or tablet device."
+    elif "webmail" in str:
+        device_OS = "Webmail"
+        description = "This email is sent from a webmail client."
+    else:
+        device_OS = ""
+
+    if device_OS != "":
+        results["device_OS"] = device_OS
+        results["description"] = description
+        results["hint"] = item
+        Info.append(results)
+
+    return
+
+def x_mailer_parser(item):
+    results = {}
+    str = item.lower()
+
+    description = "Email client software is detected."
+    results["description"] = description
+    results["hint"] = item
+    Info.append(results)
+
+    return
+
+def user_agent_parser(item):
+    results = {}
+    str = item.lower()
+
+    description = "Email client software is detected."
+    results["description"] = description
+    results["hint"] = item
+    Info.append(results)
+
+    return
+
+def username_parser(item):
+    results = {}
+    str = item.lower()
+
+    description = "Sender's internal username is detected."
+    results["description"] = description
+    results["hint"] = item
+    Info.append(results)
+
+    return
 
 main()

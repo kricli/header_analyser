@@ -1,31 +1,51 @@
 $(document).ready(function(){
   var updateResults = function(data){
-    var html = ""
-    received = data.Received
-    length = received.length
-    for (i = 0; i < length; i++) {
-      html += "<tr><td align='center'><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='ID: "
-      html += received[i].id ? received[i].id : 'Not present'
-      html += "' data-toggle='tooltip'>"
-      html += received[i].step + 1
-      html += "</span></a></td><td>"
-      html += received[i].from.IP ? received[i].from.IP : '<div class="label label-table label-info">Not present</div>'
-      html += "</td><td>"
-      html += received[i].by.address ? received[i].by.address : '<div class="label label-table label-info">Not present</div>'
-      html += "</td><td><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='"
-      html += received[i].with.protocol_description
-      html += "' data-toggle='tooltip'>"
-      html += received[i].with.protocol ? received[i].with.protocol : '<div class="label label-table label-info">Not present</div>'
-      html += "</td><td>"
-      html += received[i].for ? received[i].for : '<div class="label label-table label-info">Not present</div>'
-      html += "</td><td><span class='text-muted'><i class='fa fa-clock-o'></i> "
-      html += received[i].timestamp
-      html += "</span></td></tr>"
+    //Results highlights
+    var highlightsHtml = ""
+    info = data.Info
+    infoLength = info.length
+    for (i = 0; i < infoLength; i++) {
+      highlightsHtml += "<p>"
+      highlightsHtml += escapeHtml(info[i].description)
+      highlightsHtml += "<a class='get-code' data-toggle='collapse' href='#dynamic"
+      highlightsHtml += i
+      highlightsHtml += "' aria-expanded='true'><i class='fa fa-file-text-o' title='Show hint' data-toggle='tooltip'></i></a></p><div class='collapse m-t-15' id='dynamic"
+      highlightsHtml += i
+      highlightsHtml += "' aria-expanded='true'><code>"
+      highlightsHtml += escapeHtml(info[i].hint)
+      highlightsHtml += "</code></div>"
     }
-    $("#receivedTable").html(html)
+    $("#results").html(highlightsHtml)
+
+    //Routing information
+    var routingHtml = ""
+    received = data.Received
+    routingLength = received.length
+    for (i = 0; i < routingLength; i++) {
+      routingHtml += "<tr><td align='center'><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='ID: "
+      routingHtml += received[i].id ? received[i].id : 'Not present'
+      routingHtml += "' data-toggle='tooltip'>"
+      routingHtml += received[i].step + 1
+      routingHtml += "</span></a></td><td>"
+      routingHtml += received[i].from.IP ? received[i].from.IP : (received[i].from.address ? received[i].from.address : '<div class="label label-table label-info">Not present</div>')
+      routingHtml += "</td><td>"
+      routingHtml += received[i].by.address ? received[i].by.address : (received[i].by.IP ? received[i].by.IP : '<div class="label label-table label-info">Not present</div>')
+      routingHtml += "</td><td><a data-toggle='collapse' href='javascript:void(0)' aria-expanded='true'><span title='"
+      routingHtml += received[i].with.protocol_description
+      routingHtml += "' data-toggle='tooltip'>"
+      routingHtml += received[i].with.protocol ? received[i].with.protocol : '<div class="label label-table label-info">Not present</div>'
+      routingHtml += "</td><td>"
+      routingHtml += received[i].for ? received[i].for : '<div class="label label-table label-info">Not present</div>'
+      routingHtml += "</td><td><span class='text-muted'><i class='fa fa-clock-o'></i> "
+      routingHtml += received[i].timestamp
+      routingHtml += "</span></td></tr>"
+    }
+    $("#receivedTable").html(routingHtml)
     $('[data-toggle="tooltip"]').tooltip()
+
+    //Routing map
     var ipArray = []
-    for (i = 0; i < length; i++) {
+    for (i = 0; i < routingLength; i++) {
       var hop = received[i].step + 1
       var ip = received[i].from.IP
       if (ip !== "") {
@@ -36,6 +56,7 @@ $(document).ready(function(){
       }
     }
     google.maps.event.addDomListener(window, 'load', initMap(ipArray));
+    console.log(data)
   }
 
   var analyse = function(data){
@@ -99,6 +120,14 @@ $(document).ready(function(){
       $('#saveBox').attr('checked', false)
     }
   })()
+
+  $.ajax({
+    url: "https://cve.circl.lu/api/search/microsoft/office",
+    dataType: 'jsonp',
+    success: function(data){
+      console.log(data);
+    }
+  });
 
 
 
