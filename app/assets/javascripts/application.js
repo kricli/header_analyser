@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require jquery-cookie
 //= require jquery-deparam
-// = require pubsub-js/src/pubsub.js
+//= require pubsub-js/src/pubsub.js
 //= require j-toker
 //= require popper
 //= require custom.js

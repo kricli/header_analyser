@@ -31,6 +31,7 @@ gem "bower-rails"
 # gem "bower-rails", "~> 0.11.0"
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'fuzzily'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'

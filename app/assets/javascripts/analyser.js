@@ -56,7 +56,6 @@ $(document).ready(function(){
       }
     }
     google.maps.event.addDomListener(window, 'load', initMap(ipArray));
-    console.log(data)
   }
 
   var analyse = function(data){
@@ -121,15 +120,35 @@ $(document).ready(function(){
     }
   })()
 
-  $.ajax({
-    url: "https://cve.circl.lu/api/search/microsoft/office",
-    dataType: 'jsonp',
-    success: function(data){
-      console.log(data);
-    }
-  });
+  // $.ajax({
+  //   url: "https://cve.circl.lu/api/search/microsoft/office",
+  //   dataType: 'jsonp',
+  //   success: function(data){
+  //     console.log(data);
+  //   }
+  // });
 
 
+  $("#softwareInput").smartAutoComplete({source: '/softwares/search', forceSelect: true, maxResults: 5, delay: 300 });
 
+  $("#softwareInput").on('itemSelect', function(item){
+    //very nasty
+    setTimeout(function(){
+      var value = item.currentTarget.value
+      var splitted = value.split(" BY ")
+      var software = splitted[0]
+      var vendor = splitted[1]
+      software_str = software.replace(" ","_")
+      vendor_str = vendor.replace(" ","_")
+      $.ajax({
+        url: "/softwares/cve_search",
+        data: {'vendor'   : vendor_str,
+               'software' : software_str},
+        success: function(data){
+          console.log(data);
+        }
+      });
+    },50);
+  })
 
 });

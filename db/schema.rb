@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705153903) do
+ActiveRecord::Schema.define(version: 20170706232857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,19 @@ ActiveRecord::Schema.define(version: 20170705153903) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vendor_id"
+    t.string "vendor_name"
+    t.string "keywords"
     t.index ["vendor_id"], name: "index_softwares_on_vendor_id"
+  end
+
+  create_table "trigrams", force: :cascade do |t|
+    t.string "trigram", limit: 3
+    t.integer "score", limit: 2
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.string "fuzzy_field"
+    t.index ["owner_id", "owner_type", "fuzzy_field", "trigram", "score"], name: "index_for_match"
+    t.index ["owner_id", "owner_type"], name: "index_by_owner"
   end
 
   create_table "users", force: :cascade do |t|
