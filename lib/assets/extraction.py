@@ -216,6 +216,7 @@ def message_id_parser(item):
         results["device_OS"] = device_OS
         results["description"] = description
         results["hint"] = item
+        results["code"] = 1
         Info.append(results)
 
     return
@@ -227,6 +228,7 @@ def x_mailer_parser(item):
     description = "Email client software is detected."
     results["description"] = description
     results["hint"] = item
+    results["code"] = 2
     Info.append(results)
 
     return
@@ -238,6 +240,7 @@ def user_agent_parser(item):
     description = "Email client software is detected."
     results["description"] = description
     results["hint"] = item
+    results["code"] = 3
     Info.append(results)
 
     return
@@ -249,6 +252,7 @@ def username_parser(item):
     description = "Sender's internal username is detected."
     results["description"] = description
     results["hint"] = item
+    results["code"] = 4
     Info.append(results)
 
     return
